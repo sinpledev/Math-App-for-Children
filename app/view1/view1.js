@@ -10,16 +10,27 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', function($scope) {
+    $scope.operator = '+';
     $scope.numberArray = math.makeNumberArray();
+    $scope.showAlertFlag = false;
+    $scope.showMarkingBtnFlag = true;
     $scope.marking = function() {
-		$scope.numberArray = math.marking( $scope.numberArray, '+' );
+		$scope.showAlertFlag = true;
+		$scope.numberArray = math.marking( $scope.numberArray, $scope.operator );
+        $scope.showMarkingBtnFlag = false;
     };
+    $scope.reset = function( operator ) {
+        $scope.operator = operator;
+        $scope.numberArray = math.makeNumberArray();
+        $scope.showAlertFlag = false;
+        $scope.showMarkingBtnFlag = true;
+    }
+
 }])
 
 .directive('plusQuestions', function() {
 	return {
-		template: '{{ number.num1 }} + {{ number.num2 }} = <input type="number" ng-model="answer">{{ answer }} : {{ number.correct }}' +
-				'<div ng-show="answer == number.correct">O</div><div ng-show="(answer != number.correct) || (answer.length == 0)">X</div>'
+		templateUrl: 'view1/question_tpl.html'
 	};
 })
 .directive('minusQuestions', function() {

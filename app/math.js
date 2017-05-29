@@ -24,10 +24,9 @@ var math = {
 			tempArray.push({
                 num1        : math.makeNumber(),
                 num2        : math.makeNumber(),
-                answer      : -1,
-                correct     : -1,
-				remainder   : -1,
-
+                answer      : '',
+                correct     : '',
+				remainder   : '',
 			});
 		}
 		return tempArray;
@@ -39,6 +38,16 @@ var math = {
 
             if( calcType == '+') {
                 numArray[i].correct = numArray[i].num1 + numArray[i].num2;
+            }
+            if( calcType == '−') {
+                numArray[i].correct = numArray[i].num1 - numArray[i].num2;
+            }
+            if( calcType == '×') {
+                numArray[i].correct = numArray[i].num1 * numArray[i].num2;
+            }
+            if( calcType == '÷') {
+                numArray[i].correct = numArray[i].num1 / numArray[i].num2;
+                numArray[i].remainder = numArray[i].num1 % numArray[i].num2;
             }
         }
         return numArray;
