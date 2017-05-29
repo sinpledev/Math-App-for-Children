@@ -10,20 +10,34 @@ var math = {
 	 * @returns {number}
 	 */
 	makeNumber: function () {
-        return Math.floor(Math.random() * 10);
+        return Math.floor(Math.random() * 10) + 1;
     },
 
 	/**
      *
 	 * @returns {Array}
 	 */
-	makeNumberArray: function () {
+	makeNumberArray: function (operator) {
 		var tempArray = [];
 
 		for( var i = 0; i < math.arrayCnt; i++ ) {
+
+			var num1 = math.makeNumber();
+			var num2 = math.makeNumber();
+			if( operator == '÷' ) {
+				for( var i = 0; i < 0; i++ ) {
+					if( num1 < num2 ) {
+						break;
+					} else {
+						num1 = math.makeNumber();
+						num2 = math.makeNumber();
+					}
+				}
+			}
+
 			tempArray.push({
-                num1        : math.makeNumber(),
-                num2        : math.makeNumber(),
+                num1        : num1,
+                num2        : num2,
                 answer      : '',
                 correct     : '',
 				remainder   : '',

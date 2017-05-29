@@ -11,7 +11,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
 .controller('View1Ctrl', ['$scope', function($scope) {
     $scope.operator = '+';
-    $scope.numberArray = math.makeNumberArray();
+    $scope.numberArray = math.makeNumberArray($scope.operator);
     $scope.showAlertFlag = false;
     $scope.showMarkingBtnFlag = true;
     $scope.marking = function() {
