@@ -14,12 +14,27 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.numberArray = math.makeNumberArray($scope.operator);
     $scope.showAlertFlag = false;
     $scope.showMarkingBtnFlag = true;
-    $scope.marking = function() {
+
+    $scope.marking = marking;
+    $scope.reset = reset;
+    $scope.test = test;
+
+    function test(number) {
+    	var isCorrect = (number.answer === number.correct);
+
+    	return {
+    		'glyphicon-ok-circle': isCorrect,
+		    'glyphicon-remove-circle': !isCorrect
+    	};
+    }
+
+	function marking() {
 		$scope.showAlertFlag = true;
 		$scope.numberArray = math.marking( $scope.numberArray, $scope.operator );
         $scope.showMarkingBtnFlag = false;
-    };
-    $scope.reset = function( operator ) {
+    }
+
+    function reset( operator ) {
         $scope.operator = operator;
         $scope.numberArray = math.makeNumberArray();
         $scope.showAlertFlag = false;
@@ -32,19 +47,4 @@ angular.module('myApp.view1', ['ngRoute'])
 	return {
 		templateUrl: 'view1/question_tpl.html'
 	};
-})
-.directive('minusQuestions', function() {
-	return {
-		template: '{{ number.num1 }} − {{ number.num2 }} = <input type="number" ng-model="answer">{{ answer }}'
-	};
-})
-.directive('multiplyQuestions', function() {
-	return {
-		template: '{{ number.num1 }} × {{ number.num2 }} = <input type="number" ng-model="answer">{{ answer }}'
-	};
-})
-.directive('divisionQuestions', function() {
-	return {
-		template: '{{ number.num1 }} ÷ {{ number.num2 }} = <input type="number" ng-model="answer">{{ answer }}'
-	};
-})
+});
